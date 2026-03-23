@@ -1,0 +1,14 @@
+# build output
+.next
+out
+build
+
+# deps
+node_modules
+
+# misc
+coverage
+*.log
+
+# generated
+next-env.d.ts

@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+
+# Node / Next (app lives in platform/local)
+local/node_modules
+local/.next
+local/out
+local/build
+local/coverage
+local/*.log
+
+# Env files
+local/.env*
