@@ -13,8 +13,6 @@ export type NavItem = {
   icon: keyof typeof Icons;
   /** Optional hint shown on the right edge (e.g. ↗). */
   hint?: string;
-  /** Mark the current route. */
-  active?: boolean;
 };
 
 export type NavSection = {
@@ -86,7 +84,7 @@ export const dashboardCopy = {
 export const navSections: NavSection[] = [
   {
     items: [
-      { label: "Dashboard", href: "/", icon: "Dashboard", active: true },
+      { label: "Dashboard", href: "/", icon: "Dashboard" },
       { label: "Reports", href: "/reports", icon: "Reports" },
     ],
   },

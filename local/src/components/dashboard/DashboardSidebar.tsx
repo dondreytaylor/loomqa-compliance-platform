@@ -69,6 +69,18 @@ function SidebarNavSection({
 }
 
 export function DashboardSidebar() {
+  // This component is shared across dashboard + all sidebar-linked pages.
+  // We intentionally keep it server-rendered and pass the active route
+  // from each page to avoid introducing client-side routing dependencies.
+  return <DashboardSidebarWithActiveHref activeHref="/" />;
+}
+
+export function DashboardSidebarWithActiveHref({
+  activeHref,
+}: {
+  /** The sidebar link `href` that should receive the `.active` class. */
+  activeHref: string;
+}) {
   return (
     <aside className="sidebar">
       <div className="brand-row">
@@ -110,7 +122,7 @@ export function DashboardSidebar() {
                 href={item.href}
                 icon={item.icon}
                 hint={item.hint}
-                active={item.active}
+                active={item.href === activeHref}
               />
             ))}
           </nav>
@@ -125,6 +137,7 @@ export function DashboardSidebar() {
             href={item.href}
             icon={item.icon}
             hint={item.hint}
+            active={item.href === activeHref}
           />
         ))}
       </div>
