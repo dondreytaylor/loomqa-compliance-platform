@@ -11,13 +11,20 @@
 
 import type { Metadata } from "next";
 
+import { GlobalUiStateScreen } from "../../components/platform/GlobalUiStateScreen";
 import { PlatformShell } from "../../components/platform/PlatformShell";
+import { getGlobalUiState } from "../../lib/uiState";
 
 export const metadata: Metadata = {
   title: "Participants · LoopQA",
 };
 
 export default function ParticipantsPage() {
+  const uiState = getGlobalUiState();
+  if (uiState !== "NORMAL") {
+    return <GlobalUiStateScreen uiState={uiState} activeHref="/participants" />;
+  }
+
   return (
     <PlatformShell activeHref="/participants">
       {/* Reference: <div class="page-title">Participants</div> */}

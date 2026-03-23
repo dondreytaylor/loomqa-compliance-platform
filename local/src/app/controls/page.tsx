@@ -6,13 +6,20 @@
 
 import type { Metadata } from "next";
 
+import { GlobalUiStateScreen } from "../../components/platform/GlobalUiStateScreen";
 import { PlatformShell } from "../../components/platform/PlatformShell";
+import { getGlobalUiState } from "../../lib/uiState";
 
 export const metadata: Metadata = {
   title: "Controls · LoopQA",
 };
 
 export default function ControlsPage() {
+  const uiState = getGlobalUiState();
+  if (uiState !== "NORMAL") {
+    return <GlobalUiStateScreen uiState={uiState} activeHref="/controls" />;
+  }
+
   return (
     <PlatformShell activeHref="/controls">
       <div className="page-title">Controls</div>

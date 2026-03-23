@@ -11,13 +11,20 @@
 
 import type { Metadata } from "next";
 
+import { GlobalUiStateScreen } from "../../components/platform/GlobalUiStateScreen";
 import { PlatformShell } from "../../components/platform/PlatformShell";
+import { getGlobalUiState } from "../../lib/uiState";
 
 export const metadata: Metadata = {
   title: "Risk Management · LoopQA",
 };
 
 export default function RiskManagementPage() {
+  const uiState = getGlobalUiState();
+  if (uiState !== "NORMAL") {
+    return <GlobalUiStateScreen uiState={uiState} activeHref="/risk-management" />;
+  }
+
   return (
     <PlatformShell activeHref="/risk-management">
       {/* Reference: <div class="page-title">Risk Management</div> */}

@@ -6,7 +6,14 @@
  */
 
 import { DashboardPage } from "../components/dashboard/DashboardPage";
+import { GlobalUiStateScreen } from "../components/platform/GlobalUiStateScreen";
+import { getGlobalUiState } from "../lib/uiState";
 
 export default function Page() {
+  const uiState = getGlobalUiState();
+  if (uiState !== "NORMAL") {
+    return <GlobalUiStateScreen uiState={uiState} activeHref="/" />;
+  }
+
   return <DashboardPage />;
 }
