@@ -15,7 +15,7 @@ The local app is a Next.js-based prototype used to iterate quickly on layout, na
 
 ![Local demo](_readme-assets/local-demo.gif)
 
-### [servicenow](servicenow/)
+### [servicenow](servicenow/now-experience/)
 
 The ServiceNow app is a Now Experience implementation (UI Framework) used to bring the same dashboard concept into the ServiceNow ecosystem, including local development, build, and deploy workflows.
 
