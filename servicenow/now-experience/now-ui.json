@@ -1,0 +1,15 @@
+{
+	"components": {
+		"x-loom-platform": {
+			"innerComponents": [],
+			"uiBuilder": {
+				"associatedTypes": ["global.core", "global.landing-page"],
+				"label": "Loom Platform",
+				"tileIcon": "./tile-icon/generic-tile-icon.svg",
+				"description": "Compliance platform shell (Loom) for UI Builder",
+				"category": "primitives"
+			}
+		}
+	},
+	"scopeName": "x_loom"
+}

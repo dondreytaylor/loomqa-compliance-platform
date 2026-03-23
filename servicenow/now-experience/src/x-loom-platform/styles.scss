@@ -1,0 +1,89 @@
+@import '@servicenow/sass-kit/host';
+
+:host {
+	display: block;
+}
+
+.loom {
+	display: flex;
+	min-height: 520px;
+}
+
+.loom__sidebar {
+	width: 260px;
+	padding: 12px;
+	box-sizing: border-box;
+}
+
+.loom__brand {
+	margin-bottom: 12px;
+}
+
+.loom__brandTitle {
+	font-weight: 600;
+}
+
+.loom__brandSubtitle {
+	font-size: 12px;
+}
+
+.loom__nav {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.loom__navButton {
+	text-align: left;
+	padding: 8px 10px;
+	border: 1px solid currentColor;
+	background: transparent;
+	cursor: pointer;
+}
+
+.loom__navButton--active {
+	font-weight: 600;
+}
+
+.loom__main {
+	flex: 1;
+	padding: 12px;
+	box-sizing: border-box;
+}
+
+.loom__header {
+	margin-bottom: 12px;
+}
+
+.loom__title {
+	margin: 0;
+	font-size: 18px;
+}
+
+.loom__meta {
+	font-size: 12px;
+}
+
+.loom__content {
+	display: grid;
+	gap: 12px;
+}
+
+.loom__paragraph {
+	margin: 0;
+}
+
+.loom__card {
+	border: 1px solid currentColor;
+	padding: 12px;
+}
+
+.loom__cardTitle {
+	font-weight: 600;
+	margin-bottom: 6px;
+}
+
+.loom__list {
+	margin: 0;
+	padding-left: 18px;
+}

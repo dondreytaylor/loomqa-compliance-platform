@@ -1,0 +1,30 @@
+{
+	"name": "loom-now-experience",
+	"version": "0.0.1",
+	"private": false,
+	"description": "Loom compliance platform shell for ServiceNow UI Builder (Now Experience)",
+	"keywords": [
+		"ServiceNow",
+		"Now Experience",
+		"UI Builder",
+		"Loom"
+	],
+	"readme": "./README.md",
+	"scripts": {
+		"start": "npx -y @servicenow/cli develop --open",
+		"build": "npx -y @servicenow/cli generate-update-set --offline",
+		"deploy": "npx -y @servicenow/cli deploy",
+		"generate-update-set": "npx -y @servicenow/cli generate-update-set",
+		"test": "node -e \"console.log('No unit tests configured yet.')\""
+	},
+	"engines": {
+		"node": ">=20"
+	},
+	"module": "src/index.js",
+	"dependencies": {
+		"@servicenow/ui-core": "^24.1.1",
+		"@servicenow/ui-renderer-snabbdom": "^24.1.1",
+		"@servicenow/sass-kit": "^24.3.11-ecdd.2"
+	},
+	"devDependencies": {}
+}
