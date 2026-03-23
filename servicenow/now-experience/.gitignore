@@ -10,6 +10,8 @@ npm-debug.log
 *.iml
 *.tgz
 coverage
+.env
+.env.*
 .tectonic
 .babelrc
 /clover.xml

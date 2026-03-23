@@ -1,6 +1,9 @@
 # ServiceNow
 
-This folder contains the ServiceNow-targeted implementation(s) of Loom.
+ServiceNow-specific code lives under this folder.
 
-- UI Builder / Now Experience component: `now-experience/` (start with `now-experience/README.md`)
+- UI Builder / Now Experience component: `now-experience/`
 
+Start here:
+
+- `now-experience/README.md`

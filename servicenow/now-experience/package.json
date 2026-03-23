@@ -11,10 +11,15 @@
 	],
 	"readme": "./README.md",
 	"scripts": {
-		"start": "npx -y @servicenow/cli develop --open",
-		"build": "npx -y @servicenow/cli generate-update-set --offline",
-		"deploy": "npx -y @servicenow/cli deploy",
-		"generate-update-set": "npx -y @servicenow/cli generate-update-set",
+		"snc:configure": "node ./scripts/sncConfigureProfile.mjs",
+		"snc:list": "node ./scripts/runSnc.mjs configure profile list --output table",
+		"snc:refresh": "node ./scripts/runSnc.mjs configure profile refresh",
+		"snc:version": "node ./scripts/runSnc.mjs version --output json",
+		"postinstall": "patch-package",
+		"start": "node ./scripts/runNowCli.mjs develop --open",
+		"build": "node ./scripts/runNowCli.mjs generate-update-set --offline",
+		"deploy": "node ./scripts/runNowCli.mjs deploy",
+		"generate-update-set": "node ./scripts/runNowCli.mjs generate-update-set",
 		"test": "node -e \"console.log('No unit tests configured yet.')\""
 	},
 	"engines": {
@@ -22,9 +27,16 @@
 	},
 	"module": "src/index.js",
 	"dependencies": {
+		"@servicenow/sass-kit": "^24.3.11-ecdd.2",
 		"@servicenow/ui-core": "^24.1.1",
-		"@servicenow/ui-renderer-snabbdom": "^24.1.1",
-		"@servicenow/sass-kit": "^24.3.11-ecdd.2"
+		"@servicenow/ui-renderer-snabbdom": "^24.1.1"
 	},
-	"devDependencies": {}
+	"devDependencies": {
+		"@babel/runtime": "^7.18.9",
+		"@servicenow/cli": "^29.0.2",
+		"ajv": "^6.12.6",
+		"dotenv": "^16.4.5",
+		"patch-package": "^8.0.1",
+		"sass": "^1.53.0"
+	}
 }

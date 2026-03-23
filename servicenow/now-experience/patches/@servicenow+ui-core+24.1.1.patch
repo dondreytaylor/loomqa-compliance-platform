@@ -1,0 +1,28 @@
+diff --git a/node_modules/@servicenow/ui-core/module/createElementClass.js b/node_modules/@servicenow/ui-core/module/createElementClass.js
+index c9a83f4..438862d 100644
+--- a/node_modules/@servicenow/ui-core/module/createElementClass.js
++++ b/node_modules/@servicenow/ui-core/module/createElementClass.js
+@@ -42,7 +42,8 @@ import { property as parseProperty, properties as parseProperties } from './util
+ import log from './log';
+ import { createDispatcher, createConditionalDispatch, addActionHandlers, removeActionHandlers } from './actions';
+ import createHelpers from './utils/helpers';
+-import { version } from '../package.json';
++import pkg from '../package.json';
++const { version } = pkg;
+ import { shouldHoistAttribute, hoistAttribute, unhoistAttribute, default as hoist } from './hoist';
+ import applyStyles from './applyStyles';
+ import removeStyles from './removeStyles';
+diff --git a/node_modules/@servicenow/ui-core/module/stats.js b/node_modules/@servicenow/ui-core/module/stats.js
+index 4a737fa..a6e4cd4 100644
+--- a/node_modules/@servicenow/ui-core/module/stats.js
++++ b/node_modules/@servicenow/ui-core/module/stats.js
+@@ -19,7 +19,8 @@
+  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  * SOFTWARE.
+  */
+-import { version } from '../package.json';
++import pkg from '../package.json';
++const { version } = pkg;
+ let componentRegistry = {};
+ const stats = {
+   constructedByTagName: {},

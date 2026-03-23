@@ -16,16 +16,35 @@ import {createCustomElement} from '@servicenow/ui-core';
 import snabbdom from '@servicenow/ui-renderer-snabbdom';
 import styles from './styles.scss';
 
-import {DEFAULT_TAB_KEY, TABS} from './tabs';
-
-// Sidebar navigation model lives in ./tabs.js to keep this file focused on
-// rendering and behavior.
+import {renderAppShell} from './ui/appShell';
+import {INITIAL_STATE} from './ui/state';
 
 /**
- * Small helper to map state -> current tab model.
+ * JSX runtime shim
+ *
+ * Some ServiceNow / webpack toolchains compile JSX to `React.createElement(...)`
+ * (classic runtime) even though Next Experience components are not React apps.
+ *
+ * When that happens, you’ll see a runtime error like: "React is not defined"
+ * and nothing renders.
+ *
+ * The Snabbdom renderer already provides the correct JSX factory function
+ * (`createElement`) and a `Fragment` implementation. We expose a minimal global
+ * `React` object so the compiled output can run without adding React as a
+ * dependency.
  */
-const getActiveTab = (activeTabKey) =>
-	TABS.find((tab) => tab.key === activeTabKey) || TABS[0];
+if (typeof globalThis !== 'undefined') {
+	const existing = globalThis.React;
+	if (!existing) {
+		globalThis.React = {
+			createElement: snabbdom.createElement,
+			Fragment: snabbdom.Fragment
+		};
+	} else {
+		if (!existing.createElement) existing.createElement = snabbdom.createElement;
+		if (!existing.Fragment) existing.Fragment = snabbdom.Fragment;
+	}
+}
 
 /**
  * View function (UI Framework pattern).
@@ -34,69 +53,7 @@ const getActiveTab = (activeTabKey) =>
  * - The second argument includes helpers provided by the framework.
  * - `updateState(partial)` merges state and triggers a re-render.
  */
-const view = (state, {updateState}) => {
-	// Persist the selected section in state.
-	const activeTabKey = state.activeTab || DEFAULT_TAB_KEY;
-	const activeTab = getActiveTab(activeTabKey);
-
-	return (
-		<div className="loom">
-			{/* Left sidebar navigation */}
-			<aside className="loom__sidebar">
-				<div className="loom__brand">
-					<div className="loom__brandTitle">Loom</div>
-					<div className="loom__brandSubtitle">Next Experience</div>
-				</div>
-
-				<nav className="loom__nav" aria-label="Loom sections">
-					{TABS.map((tab) => {
-						const isActive = tab.key === activeTabKey;
-						const className =
-							'loom__navButton' +
-							(isActive ? ' loom__navButton--active' : '');
-
-						return (
-							<button
-								key={tab.key}
-								type="button"
-								className={className}
-								// Snabbdom/ServiceNow UI Framework event binding
-								on-click={() => updateState({activeTab: tab.key})}
-							>
-								{tab.label}
-							</button>
-						);
-					})}
-				</nav>
-			</aside>
-
-			{/* Main content area */}
-			<main className="loom__main">
-				<header className="loom__header">
-					<h1 className="loom__title">{activeTab.label}</h1>
-					<div className="loom__meta">This is a UI Builder component scaffold.</div>
-				</header>
-
-				<section className="loom__content" aria-label="Section content">
-					<p className="loom__paragraph">
-						Replace this content with your Next Experience implementation for{' '}
-						<strong>{activeTab.label}</strong>.
-					</p>
-
-					<div className="loom__card">
-						<div className="loom__cardTitle">Next steps</div>
-						<ul className="loom__list">
-							<li>Install SNC (`snc`) on your machine</li>
-							<li>Deploy with `@servicenow/cli`</li>
-							<li>Add the component to a UI Builder page</li>
-							<li>Wire real data via instance APIs</li>
-						</ul>
-					</div>
-				</section>
-			</main>
-		</div>
-	);
-};
+const view = (state, helpers) => renderAppShell(state, helpers);
 
 /**
  * Component registration.
@@ -106,5 +63,6 @@ const view = (state, {updateState}) => {
 createCustomElement('x-loom-platform', {
 	renderer: {type: snabbdom},
 	view,
+	initialState: INITIAL_STATE,
 	styles
 });
