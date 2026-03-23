@@ -118,6 +118,23 @@ async function main() {
 		console.error('  snc configure profile set');
 		process.exit(1);
 	}
+
+	// Guardrail: `host` must be ONLY a host name.
+	// If a user pastes a full URL (or URL + path), downstream tooling can throw
+	// opaque errors like "Table Operation READ Failure: Invalid URL".
+	if (/^https?:\/\//i.test(host) || /[/?#]/.test(host)) {
+		console.error('SNC default profile host looks malformed.');
+		console.error('Expected host only (no https://, no path/query), but got:');
+		console.error(`  ${host}`);
+		console.error('');
+		console.error('Fix by re-running:');
+		console.error('  snc configure profile set');
+		console.error('and when prompted for Host, enter something like:');
+		console.error('  dev12345.service-now.com');
+		console.error('');
+		console.error('Alternative: put SN_HOST/SN_USERNAME/SN_PASSWORD in .env to use direct login flags.');
+		process.exit(1);
+	}
 }
 
 main().catch((err) => {

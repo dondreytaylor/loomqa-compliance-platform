@@ -60,7 +60,7 @@ const view = (state, helpers) => renderAppShell(state, helpers);
  *
  * The tag name here must match the one referenced in now-ui.json.
  */
-createCustomElement('x-loom-platform', {
+createCustomElement('x-1962763-loom-platform', {
 	renderer: {type: snabbdom},
 	view,
 	initialState: INITIAL_STATE,

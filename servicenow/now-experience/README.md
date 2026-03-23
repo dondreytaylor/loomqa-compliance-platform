@@ -305,7 +305,22 @@ The component definition that makes it discoverable is in `now-ui.json`.
 
 - `scopeName`: the ServiceNow application scope that owns the component.
 
-Default is `"x_loom"`. If your instance uses a different scope, update it before deploying.
+This repo currently uses `"x_1962763_loom"`. If your instance uses a different scope, update it before deploying.
+
+## Important config: component tag vendor prefix
+
+ServiceNow enforces a vendor prefix for custom element tag names.
+If your instance requires a prefix like `x-1962763-`, your component tag must start with it.
+
+This repo currently registers the component as:
+
+- `x-1962763-loom-platform`
+
+If your vendor prefix differs, update:
+
+- `now-ui.json` (component key)
+- `src/x-loom-platform/index.js` (`createCustomElement('<tag>', ...)`)
+- `example/element.js` (local preview tag)
 
 ## Configuration
 

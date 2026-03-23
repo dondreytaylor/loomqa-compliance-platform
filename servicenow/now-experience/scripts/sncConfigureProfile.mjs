@@ -22,15 +22,18 @@ function getEnv(name) {
 }
 
 function normalizeHost(host) {
-	const trimmed = host.trim().replace(/\/+$/, '');
+	const trimmed = String(host ?? '').trim().replace(/^['"]|['"]$/g, '');
+	if (!trimmed) return '';
 	if (/^https?:\/\//i.test(trimmed)) {
 		try {
 			return new URL(trimmed).host;
 		} catch {
-			return trimmed;
+			// Fall through to the non-URL path.
 		}
 	}
-	return trimmed;
+
+	// SNC expects the instance host only. Strip any path/query/hash.
+	return trimmed.replace(/^https?:\/\//i, '').split(/[/?#]/)[0].replace(/\/+$/, '');
 }
 
 const snHostRaw = getEnv('SN_HOST');

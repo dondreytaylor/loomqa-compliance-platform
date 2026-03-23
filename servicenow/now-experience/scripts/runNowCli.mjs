@@ -28,8 +28,41 @@ function hasArg(args, name) {
 	return args.includes(name);
 }
 
-function normalizeLoginHost(host) {
-	return host.replace(/^https?:\/\//i, '').replace(/\/+$/, '');
+function normalizeHostOnly(host) {
+	const trimmed = String(host ?? '').trim().replace(/^['"]|['"]$/g, '');
+	if (!trimmed) return '';
+	if (/^https?:\/\//i.test(trimmed)) {
+		try {
+			return new URL(trimmed).host;
+		} catch {
+			// Fall through to the non-URL path.
+		}
+	}
+
+	// Host-only (strip any path/query/hash).
+	return trimmed.replace(/^https?:\/\//i, '').split(/[/?#]/)[0].replace(/\/+$/, '');
+}
+
+function normalizeLoginHostUrl(host) {
+	const hostOnly = normalizeHostOnly(host);
+	return hostOnly ? `https://${hostOnly}` : '';
+}
+
+function normalizeLoginHostArgInPlace(args) {
+	const idx = args.indexOf('--loginHost');
+	if (idx < 0) return args;
+	const value = args[idx + 1];
+	if (!value || value.startsWith('-')) return args;
+
+	// If the user already supplied https://..., keep it (but strip path).
+	if (/^https?:\/\//i.test(value)) {
+		args[idx + 1] = normalizeLoginHostUrl(value);
+		return args;
+	}
+
+	// If the user supplied a bare host, upgrade it to a full URL.
+	args[idx + 1] = normalizeLoginHostUrl(value);
+	return args;
 }
 
 function buildDirectLoginArgs(existingArgs) {
@@ -42,7 +75,7 @@ function buildDirectLoginArgs(existingArgs) {
 	const password = getEnv('SN_PASSWORD');
 	if (!host || !username || !password) return [];
 
-	return ['--loginHost', normalizeLoginHost(host), '--username', username, '--password', password];
+	return ['--loginHost', normalizeLoginHostUrl(host), '--username', username, '--password', password];
 }
 
 function buildEnvForChild() {
@@ -101,6 +134,9 @@ async function main() {
 		console.error('Usage: node scripts/runNowCli.mjs <@servicenow/cli args...>');
 		process.exit(2);
 	}
+
+	// Guardrail: ensure any provided --loginHost is a full URL (https://...).
+	normalizeLoginHostArgInPlace(cliArgs);
 
 	const directLoginArgs = buildDirectLoginArgs(cliArgs);
 	if (directLoginArgs.length > 0) {
