@@ -1,5 +1,5 @@
 /**
- * Central, typed configuration for the LoomQA Platform web app.
+ * Central, typed configuration for the LoopQA Platform web app.
  *
  * Keep values here (instead of sprinkling them across components) so:
  * - the UI stays consistent
@@ -16,7 +16,7 @@ export const appConfig = {
     "Track integrity posture, audit readiness, recent drift, and the next remediation steps across controls, frameworks, and integrated systems.",
 
   /** Repo URL (used for links; update if it changes). */
-  repoUrl: "https://github.com/dondreytaylor/loomqa-compliance-platform.git",
+  repoUrl: "https://github.com/dondreytaylor/LoopQA-compliance-platform.git",
 
   /** Default port we expose in Docker and locally. */
   port: 3000,

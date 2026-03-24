@@ -39,7 +39,7 @@ export function middleware(request: NextRequest) {
     : (pathnameFromRewritten ?? pathnameFromNextUrl ?? internalPathname);
 
   const requestHeaders = new Headers(request.headers);
-  requestHeaders.set("x-loomqa-pathname", pathnameForUi);
+  requestHeaders.set("x-LoopQA-pathname", pathnameForUi);
 
   return NextResponse.next({
     request: {

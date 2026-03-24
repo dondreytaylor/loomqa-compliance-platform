@@ -1,5 +1,5 @@
 services:
-  loomqa-platform:
+  LoopQA-platform:
     build:
       context: ./local
       dockerfile: Dockerfile

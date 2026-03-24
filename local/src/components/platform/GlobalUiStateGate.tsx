@@ -21,7 +21,7 @@ export async function GlobalUiStateGate({ children }: { children: ReactNode }) {
 
   const headerList = await headers();
   const pathnameCandidate =
-    headerList.get("x-loomqa-pathname") ??
+    headerList.get("x-LoopQA-pathname") ??
     parsePathname(headerList.get("next-url")) ??
     parsePathname(headerList.get("x-nextjs-rewritten-path")) ??
     "/";

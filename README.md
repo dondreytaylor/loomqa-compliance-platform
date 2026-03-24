@@ -1,8 +1,8 @@
-![LoomQA banner](_readme-assets/banner.png)
+![LoopQA banner](_readme-assets/banner.png)
 
 # Compliance Platform
 
-This repo contains LoomQA’s compliance dashboard concept in two implementations:
+This repo contains LoopQA’s compliance dashboard concept in two implementations:
 
 - a **local** web app for rapid UI iteration
 - a **ServiceNow** (Now Experience) app to validate the same UX patterns in-platform
@@ -25,7 +25,7 @@ The ServiceNow app is a Now Experience implementation (UI Framework) used to bri
 
 Primary design file:
 
-- https://www.figma.com/design/Pkznx55LFsoWm2QLKVGMTk/LoomQA?node-id=0-1&t=4B3dqukvqpHQ2TIR-1
+- https://www.figma.com/design/Pkznx55LFsoWm2QLKVGMTk/LoopQA?node-id=0-1&t=4B3dqukvqpHQ2TIR-1
 
 ## Inspiration & approach
 

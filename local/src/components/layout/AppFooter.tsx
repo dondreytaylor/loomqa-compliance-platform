@@ -17,7 +17,7 @@ export function AppFooter({ repoUrl }: AppFooterProps) {
 
   return (
     <footer className={styles.footer}>
-      <span className={styles.muted}>© {year} LoomQA</span>
+      <span className={styles.muted}>© {year} LoopQA</span>
       <ExternalLink href={repoUrl}>Repository</ExternalLink>
     </footer>
   );
