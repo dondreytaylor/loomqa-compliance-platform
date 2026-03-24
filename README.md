@@ -45,3 +45,15 @@ AI was also imperfect in a few areas:
 
 - **Design refinements:** it was less reliable for fine-grained visual polish and consistency work compared to manual iteration.
 - **Deploy/config pitfalls:** it occasionally introduced incorrect URLs and configuration assumptions that led to failed deployments to a ServiceNow instance until those settings were corrected.
+
+## Assumptions/Major Tradeoffs
+
+I made various assumptions as I was creating this, for example I assumed that the entire application should be one to one with service now from a UI perspective which isn't necessairly the case. I also had various options to how this could have been implemented in Service Now, for example: Next UI Experience, Service Portal, or through Service Now's API.  
+
+For simplicity I chose to implement the dashboard page using the Next UI and added the dashboard as a single component. Alternatively, I could have further broken up the dashboard into various components, deployed that to ServiceNow and then used ServiceNow's UI Builder to construct the components directly. 
+
+There are a ton of tradeoffs that needed to be made, for example managing the UI in ServiceNow directly versus through code. There are pros and cons to both approach, especially as the team scales. 
+
+## Next Time/Future Additions
+
+I would have loved to have more time to implement the page as seperate ServiceNow Next components rather than use the entire page as a component. I also would have like to hook into the ServiceNow MariaDB to actually pull and push data to/from ServiceNow. Lastly, add in some more unit tests. 
