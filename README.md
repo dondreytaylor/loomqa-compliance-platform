@@ -7,6 +7,14 @@ This repo contains LoopQA’s compliance dashboard concept in two implementation
 - a **local** web app for rapid UI iteration
 - a **ServiceNow** (Now Experience) app to validate the same UX patterns in-platform
 
+
+## Watch Demo
+(click thumbnail below to watch demo)
+
+[![VIDEO_ALT_TEXT](https://img.youtube.com/vi/APKN7o-LY6M/0.jpg)]([https://www.youtube.com](https://youtu.be/APKN7o-LY6M) "LoopQA Demo")
+
+
+
 ## Folder overview
 
 ### [local](local/)
